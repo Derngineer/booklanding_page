@@ -1,0 +1,16 @@
+# Netlify redirects file for Next.js App Router
+/*    /index.html   200
+
+# Specific redirects for sections (optional - for better SEO)
+/curriculum  /#curriculum  302
+/video       /#video       302
+/benefits    /#benefits    302
+/author      /#author      302
+/pricing     /#pricing     302
+
+# Handle trailing slashes
+/video/      /#video       302
+/curriculum/ /#curriculum  302
+/benefits/   /#benefits    302
+/author/     /#author      302
+/pricing/    /#pricing     302

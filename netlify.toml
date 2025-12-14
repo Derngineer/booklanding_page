@@ -1,0 +1,52 @@
+[build]
+  # Build command for Next.js
+  command = "npm run build"
+  # Output directory for static files
+  publish = "out"
+
+[build.environment]
+  # Node.js version for build
+  NODE_VERSION = "18"
+  # Ensure pnpm is available if needed
+  NPM_FLAGS = "--production=false"
+
+# Redirect rules for Next.js App Router
+[[redirects]]
+  # Handle client-side routing
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers for performance and security
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Security headers
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    # Performance headers
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "*.json"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Optimize images
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Preload critical resources
+[[headers]]
+  for = "/"
+  [headers.values]
+    Link = "</images/bookcover1.png>; rel=preload; as=image, </images/logo.png>; rel=preload; as=image"
